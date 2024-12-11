@@ -44,7 +44,7 @@ This is a powerful Python-based data analysis tool designed to automate comprehe
 
 ## Usage
 ```bash
-uv run autolyis.py your_dataset.set or python autolysis.py your_dataset.csv 
+uv run autolysis.py your_dataset.set or python autolysis.py your_dataset.csv 
 ```
 
 Generates:
