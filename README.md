@@ -1,4 +1,4 @@
-# TDS Autolysis: Automated Data Science Analysis Pipeline
+# Autolysis: Automated Data Science Analysis Pipeline
 
 ## Overview
 This is a powerful Python-based data analysis tool designed to automate comprehensive exploratory data analysis (EDA) for CSV datasets. The script performs a robust, multi-faceted analysis that transforms raw data into actionable insights through statistical computations, visualization, and AI-powered narrative generation.
