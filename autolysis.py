@@ -3,6 +3,7 @@ import sys
 import csv
 import numpy as np
 import pandas as pd
+
 import matplotlib.pyplot as plt
 import json
 import requests
@@ -130,6 +131,7 @@ class AdvancedDataAnalyzer:
     def advanced_outlier_detection(self):
         
         # Multi-method outlier detection with visualization
+            
         # Dynamic Analyis
         outlier_methods = {
             'iqr': self._iqr_outliers,
@@ -145,14 +147,16 @@ class AdvancedDataAnalyzer:
         # Enhanced visualization
         plt.figure(figsize=(20, 10))
         plt.suptitle('Outlier Detection Comparison', fontsize=16)
-        
+
+        # Plotting the outliers
         for i, (method, method_outliers) in enumerate(all_outliers.items(), 1):
             plt.subplot(2, len(all_outliers), i)
             for col, details in method_outliers.items():
                 sns.boxplot(data=self.df, y=col, palette='Set2')
                 plt.title(f'{method.replace("_", " ").title()}: {col} Outliers', fontsize=10)
                 plt.xticks(rotation=45)
-
+                    
+        # Optimize the image configuration
         plt.tight_layout()
         plt.savefig('outliers_boxplot.png', dpi=self.config['visualization_dpi'])
         plt.close()
@@ -162,14 +166,17 @@ class AdvancedDataAnalyzer:
     def _iqr_outliers(self):
         numeric_columns = self.df.select_dtypes(include=[np.number]).columns
         outliers = {}
-        
+
+        # Quantile calculations
+            
         for column in numeric_columns:
             Q1 = self.df[column].quantile(0.25)
             Q3 = self.df[column].quantile(0.75)
             IQR = Q3 - Q1
             lower_bound = Q1 - 1.5 * IQR
             upper_bound = Q3 + 1.5 * IQR
-            
+                
+            # Creating column outliers
             column_outliers = self.df[(self.df[column] < lower_bound) | (self.df[column] > upper_bound)]
             if len(column_outliers) > 0:
                 outliers[column] = {
@@ -269,7 +276,8 @@ class AdvancedDataAnalyzer:
             plt.xlabel('First Principal Component')
             plt.ylabel('Second Principal Component')
             plt.colorbar(scatter, label='Cluster')
-        
+                
+        # Optimize the image configuration
         plt.tight_layout()
         plt.savefig('cluster_analysis.png', dpi=self.config['visualization_dpi'])
         plt.close()
@@ -279,7 +287,7 @@ class AdvancedDataAnalyzer:
 
     def generate_llm_summary(self) -> str:
         
-        # Advanced LLM-powered narrative generation with multi-stage, contextual analysis
+        # Advanced LLM-powered narrative generation with multi-stage, contextual analysis with reduced token usage
         
         # Prepare comprehensive analysis context
         analysis_context = self._prepare_analysis_context()
@@ -300,7 +308,7 @@ class AdvancedDataAnalyzer:
     def _prepare_analysis_context(self) -> Dict[str, Any]:
         
         # Prepare a comprehensive context for narrative generation
-        
+        # Reducing token usage
         # Combine insights from various analyses
         profiling = self.advanced_data_profiling()
         outliers = self.advanced_outlier_detection()
@@ -327,6 +335,7 @@ class AdvancedDataAnalyzer:
     def _generate_overview_prompt(self, context: Dict[str, Any]) -> str:
         
         # Generate an overview prompt focusing on dataset structure
+            
         # Providing optimum amount of data
         overview_prompt = f"""
         Provide a comprehensive overview of the dataset:
@@ -374,7 +383,7 @@ class AdvancedDataAnalyzer:
     def _generate_recommendations_prompt(self, context: Dict[str, Any]) -> str:
         
         # Generate recommendations based on the analysis
-        # Multiple LLM Prompts
+        # Multiple LLM Prompts with reduced token usage
         recommendations_prompt = f"""
         Based on the comprehensive dataset analysis, 
         provide strategic recommendations:
