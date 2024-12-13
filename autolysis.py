@@ -3,7 +3,6 @@ import sys
 import csv
 import numpy as np
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 import json
 import requests
@@ -17,11 +16,12 @@ from sklearn.feature_selection import mutual_info_classif
 from sklearn.ensemble import IsolationForest
 from sklearn.metrics import silhouette_score
 from typing import Dict, Any, List
+import seaborn as sns
 
 def json_serialize_handler(obj):
-        """
-        JSON serialization handler for various non-standard types
-        """
+        
+        #JSON serialization handler for various non-standard types
+        
         if isinstance(obj, (np.integer, np.floating, np.bool_)):
             return obj.item()  # Convert NumPy scalar to Python scalar
         elif isinstance(obj, np.ndarray):
@@ -34,9 +34,9 @@ def json_serialize_handler(obj):
 
 class AdvancedDataAnalyzer:
     def __init__(self, filename):
-        """
-        Initialize the data analyzer with robust error handling and dynamic configuration
-        """
+        
+        # Initialize the data analyzer with robust error handling and dynamic configuration
+
         self.filename = filename
         self.df = self._load_csv()
         self.config = {
@@ -47,9 +47,9 @@ class AdvancedDataAnalyzer:
         }
 
     def _load_csv(self):
-        """
-        Enhanced CSV loading with comprehensive encoding detection and validation
-        """
+        
+        # Enhanced CSV loading with comprehensive encoding detection and validation
+        
         encodings_to_try = [
             'utf-8', 'iso-8859-1', 'latin1', 'cp1252', 'utf-16', 
             'ascii', 'big5', 'shift_jis', 'gb2312'
@@ -75,9 +75,9 @@ class AdvancedDataAnalyzer:
         raise ValueError("Could not load CSV file with any attempted encoding")
 
     def advanced_data_profiling(self):
-        """
-        Comprehensive data profiling with advanced statistical insights
-        """
+            
+        # Comprehensive data profiling with advanced statistical insights
+        
         # Data type inference and advanced type detection
         data_types = {}
         for col in self.df.columns:
@@ -128,9 +128,9 @@ class AdvancedDataAnalyzer:
         }
 
     def advanced_outlier_detection(self):
-        """
-        Multi-method outlier detection with visualization
-        """
+        
+        # Multi-method outlier detection with visualization
+        # Dynamic Analyis
         outlier_methods = {
             'iqr': self._iqr_outliers,
             'isolation_forest': self._isolation_forest_outliers
@@ -182,6 +182,7 @@ class AdvancedDataAnalyzer:
         return outliers
 
     def _isolation_forest_outliers(self):
+        # Dynamic Analyis
         numeric_columns = self.df.select_dtypes(include=[np.number]).columns
         
         if len(numeric_columns) == 0:
@@ -209,9 +210,9 @@ class AdvancedDataAnalyzer:
         return outliers
 
     def advanced_clustering(self):
-        """
-        Multi-method clustering with optimal cluster determination
-        """
+        
+        # Multi-method clustering with optimal cluster determination
+        
         numeric_columns = self.df.select_dtypes(include=[np.number]).columns
         
         # Data preparation
@@ -277,13 +278,14 @@ class AdvancedDataAnalyzer:
 
 
     def generate_llm_summary(self) -> str:
-        """
-        Advanced LLM-powered narrative generation with multi-stage, contextual analysis
-        """
+        
+        # Advanced LLM-powered narrative generation with multi-stage, contextual analysis
+        
         # Prepare comprehensive analysis context
         analysis_context = self._prepare_analysis_context()
         
         # Define a series of prompts for multi-faceted narrative generation
+        
         narrative_stages = [
             self._generate_overview_prompt(analysis_context),
             self._generate_insights_prompt(analysis_context),
@@ -296,9 +298,9 @@ class AdvancedDataAnalyzer:
         return full_narrative
 
     def _prepare_analysis_context(self) -> Dict[str, Any]:
-        """
-        Prepare a comprehensive context for narrative generation
-        """
+        
+        # Prepare a comprehensive context for narrative generation
+        
         # Combine insights from various analyses
         profiling = self.advanced_data_profiling()
         outliers = self.advanced_outlier_detection()
@@ -323,9 +325,9 @@ class AdvancedDataAnalyzer:
         }
 
     def _generate_overview_prompt(self, context: Dict[str, Any]) -> str:
-        """
-        Generate an overview prompt focusing on dataset structure
-        """
+        
+        # Generate an overview prompt focusing on dataset structure
+        # Providing optimum amount of data
         overview_prompt = f"""
         Provide a comprehensive overview of the dataset:
         
@@ -344,9 +346,9 @@ class AdvancedDataAnalyzer:
         return self._send_llm_request(overview_prompt)
 
     def _generate_insights_prompt(self, context: Dict[str, Any]) -> str:
-        """
-        Generate insights prompt focusing on statistical patterns
-        """
+        
+        # Generate insights prompt focusing on statistical patterns
+        # Providing optimum amount of data
         insights_prompt = f"""
         Analyze statistical insights and patterns in the dataset:
         
@@ -370,9 +372,9 @@ class AdvancedDataAnalyzer:
         return self._send_llm_request(insights_prompt)
 
     def _generate_recommendations_prompt(self, context: Dict[str, Any]) -> str:
-        """
-        Generate recommendations based on the analysis
-        """
+        
+        # Generate recommendations based on the analysis
+        # Multiple LLM Prompts
         recommendations_prompt = f"""
         Based on the comprehensive dataset analysis, 
         provide strategic recommendations:
@@ -396,9 +398,9 @@ class AdvancedDataAnalyzer:
         return self._send_llm_request(recommendations_prompt)
 
     def _compose_narrative(self, narrative_stages: List[str]) -> str:
-        """
-        Compose a coherent narrative from different analysis stages
-        """
+        
+        # Compose a coherent narrative from different analysis stages
+        
         final_prompt = f"""
         Integrate the following analysis stages into a cohesive, 
         storytelling narrative that provides a comprehensive 
@@ -423,9 +425,9 @@ class AdvancedDataAnalyzer:
         return self._send_llm_request(final_prompt)
 
     def _send_llm_request(self, prompt: str) -> str:
-        """
-        Send request to AI Proxy with robust error handling
-        """
+        
+        # Send request to AI Proxy with robust error handling
+        
         AIPROXY_TOKEN = os.environ.get("AIPROXY_TOKEN")
         
         if not AIPROXY_TOKEN:
@@ -437,7 +439,7 @@ class AdvancedDataAnalyzer:
             "Content-Type": "application/json",
             "Authorization": f"Bearer {AIPROXY_TOKEN}"
         }
-        
+        # Optimum token usage
         data = {
             "model": "gpt-4o-mini",
             "messages": [{"role": "user", "content": prompt}],
@@ -456,11 +458,11 @@ class AdvancedDataAnalyzer:
         except requests.exceptions.RequestException as e:
             return f"Error generating narrative: {e}"
 
-    # Update the main method to use the new summary generation
+    # Update the main method to use the summary generation
     def generate_comprehensive_report(self):
-        """
-        Generate a comprehensive report with LLM-powered narrative
-        """
+        
+        # Generate a comprehensive report with LLM-powered narrative
+        
         # analysis methods
         profiling = self.advanced_data_profiling()
         outliers = self.advanced_outlier_detection()
