@@ -1,3 +1,16 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "numpy",
+#   "pandas",
+#   "matplotlib",
+#   "seaborn",
+#   "scipy",
+#   "scikit-learn",
+#   "requests",
+#   "chardet"
+# ]
+# ///
 import os
 import sys
 import csv
