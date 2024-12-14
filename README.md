@@ -14,7 +14,6 @@ This is a powerful Python-based data analysis tool designed to automate comprehe
 - Structural analysis of datasets
 - Statistical summaries
 - Outlier detection
-- Correlation matrix generation
 - Clustering analysis
 
 ### 3. Advanced Visualizations
