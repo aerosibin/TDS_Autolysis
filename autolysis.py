@@ -158,7 +158,7 @@ class AdvancedDataAnalyzer:
             if outliers:
                 all_outliers[method_name] = outliers
 
-        # Enhanced visualization with labels, colors and legends
+        # Enhanced visualization with labels, colors and legends 
             
         plt.figure(figsize=(20, 10))
         plt.suptitle('Outlier Detection Comparison', fontsize=16)
@@ -171,7 +171,7 @@ class AdvancedDataAnalyzer:
                 plt.title(f'{method.replace("_", " ").title()}: {col} Outliers', fontsize=10)
                 plt.xticks(rotation=45)
 
-        # Optimize the image configuration with colors
+        # Optimize the image configuration with colors effectively
         plt.tight_layout()
         plt.savefig('outliers_boxplot.png', dpi=self.config['visualization_dpi'])
         plt.close()
@@ -308,8 +308,8 @@ class AdvancedDataAnalyzer:
         # Prepare comprehensive analysis context
         analysis_context = self._prepare_analysis_context()
 
-        # Define a series of prompts for multi-faceted narrative generation
-
+        # Define a series of prompts for multi-faceted narrative generation and agentic work flow
+        
         narrative_stages = [
             self._generate_overview_prompt(analysis_context),
             self._generate_insights_prompt(analysis_context),
@@ -355,6 +355,7 @@ class AdvancedDataAnalyzer:
         # Generate an overview prompt focusing on dataset structure
         # Dynamic prompting according to the data
         # Providing optimum amount of data
+        # Complex statistical outputs are simplified for human readability
         overview_prompt = f"""
         Provide a comprehensive overview of the dataset:
 
@@ -373,7 +374,7 @@ class AdvancedDataAnalyzer:
         return self._send_llm_request(overview_prompt)
 
     def _generate_insights_prompt(self, context: Dict[str, Any]) -> str:
-
+        
         # Generate insights prompt focusing on statistical patterns
         # Providing optimum amount of data
         # Context rich prompt
@@ -485,7 +486,8 @@ class AdvancedDataAnalyzer:
         # Compose a coherent narrative from different analysis stages
         # Dynamic prompting effectively
         # Integrating visualization effectively
-        # Agentic work flow
+        # Multi-Agentic work flow
+        # Context rich prompting
         final_prompt = f"""
         Integrate the following analysis stages into a cohesive,
         storytelling narrative that provides a comprehensive
