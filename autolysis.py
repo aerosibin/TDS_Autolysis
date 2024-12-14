@@ -483,6 +483,7 @@ class AdvancedDataAnalyzer:
 
     def _compose_narrative(self, narrative_stages: List[str]) -> str:
         # Compose a coherent narrative from different analysis stages
+        # Dynamic prompting effectively
         # Integrating visualization effectively
         # Agentic work flow
         final_prompt = f"""
@@ -585,7 +586,7 @@ def main():
             f.write("\n\n## Visualizations\n")
             f.write("![Outliers Boxplot](outliers_boxplot.png)\n")
             f.write("![Cluster Analysis](cluster_analysis.png)\n")
-            if (llm_suggested_graph.png):
+            if ("llm_suggested_graph.png"):
                     f.write("![LLM Suggested Graph](llm_suggested_graph.png)\n")
         
 
